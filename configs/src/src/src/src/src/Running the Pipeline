@@ -1,0 +1,1 @@
+python src/run_pipeline.py --config configs/config.yaml
