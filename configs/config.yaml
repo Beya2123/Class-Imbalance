@@ -1,0 +1,41 @@
+data:
+  raw_path: "data/raw/dataset.csv"
+  out_dir: "data/processed"
+  text_col: "text"
+  label_col: "label"
+  splits: [0.30, 0.15, 0.20]      # 70-30, 85-15, 80-20 (test fractions)
+  val_frac_of_train: 0.10
+  seed: 42
+
+clean:
+  strip_html: true
+  remove_urls: true
+  remove_mentions: true
+  remove_emails: true
+  normalize_unicode: true
+  collapse_whitespace: true
+  lowercase: true
+
+tfidf:
+  word_ngram: [1, 2]
+  char_ngram: [3, 5]
+  max_features: 200000
+  sublinear_tf: true
+  min_df: 2
+  max_df: 0.95
+  analyzer_word: "word"
+  analyzer_char: "char_wb"
+
+tokenizer:
+  bert_name: "bert-base-multilingual-cased"     # AfriBERTa is XLM-R-like; use its own tokenizer in practice
+  afriberta_name: "castorini/afriberta_base"
+  xlmr_name: "xlm-roberta-base"
+  finetuned_name: "xlm-roberta-base"            # or your best checkpoint path
+  max_len: 128
+
+augment:
+  enabled: true
+  synonym_replace_p: 0.10
+  random_swap_p: 0.05
+  random_deletion_p: 0.05
+  backtranslation: false
